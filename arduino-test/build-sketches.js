@@ -5,7 +5,7 @@ const child_process = require('child_process');
 
 const SketchTemplater = require('../src');
 
-const sketchTemplater = new SketchTemplater('test.ingress.domain');
+const sketchTemplater = new SketchTemplater('api.opensensemap.org');
 
 const boxStub = function (model) {
   return {
