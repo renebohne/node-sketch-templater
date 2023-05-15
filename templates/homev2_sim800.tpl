@@ -301,15 +301,15 @@ void writeMeasurementsToClient() {
 }
 
 void submitValues() {
-  if (!modem.isGprsConnected()) {
-    connectModem();
-  }
-
   // close any connection before send a new request.
   // This will free the socket
   if (client.connected()) {
     client.stop();
     delay(1000);
+  }
+
+   if (!modem.isGprsConnected()) {
+    connectModem();
   }
 
   bool connected = false;
@@ -465,12 +465,6 @@ void setup() {
 
   delay(1000);
 
-  SerialAT.begin(115200); // SIM800 modem
-  delay(10);
-  digitalWrite(PIN_XB1_CS, HIGH);//logic inverted by T1 (GPRSBee) and inverted by T1T1 (sensebox) -> inverted inverted = not inverted
-  delay(1100);
-  digitalWrite(PIN_XB1_CS, LOW);
-
 #ifdef DISPLAY128x64_CONNECTED
   DEBUG2(F("enable display..."));
   delay(2000);
@@ -498,6 +492,14 @@ void setup() {
   display.setTextSize(1);
   display.display();
 #endif
+
+
+  SerialAT.begin(115200); // SIM800 modem
+  delay(10);
+  digitalWrite(PIN_XB1_CS, LOW);//logic inverted by T1 (GPRSBee) and inverted by T1T1 (sensebox) -> inverted inverted = not inverted
+  delay(1100);
+  digitalWrite(PIN_XB1_CS, HIGH);
+  delay(100);
 
   DEBUG2(F("Initializing modem..."));
   modem.restart();
