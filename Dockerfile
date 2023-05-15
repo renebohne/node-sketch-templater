@@ -31,8 +31,11 @@ RUN arduino-cli lib install --zip-path VEML6070.zip
 RUN arduino-cli lib install --zip-path LTR329.zip
 RUN arduino-cli lib install --zip-path sps30.zip
 RUN arduino-cli lib install --git-url https://github.com/sensebox/SDS011-select-serial
+
+# install stuff for sim800
 RUN arduino-cli lib install --git-url https://github.com/vshymanskyy/TinyGSM.git#v0.11.5
 RUN arduino-cli lib install --git-url https://github.com/PaulStoffregen/Time.git
+RUN arduino-cli lib install --git-url https://github.com/OPEnSLab-OSU/SSLClient.git#v1.6.11
 
 # install arduino stuff for senseBox V2
 RUN arduino-cli core install arduino:samd@1.8.13
